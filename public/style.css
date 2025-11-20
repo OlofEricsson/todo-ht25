@@ -3,5 +3,44 @@ body {
   color: #666;
   background-color: #f1f1f1;
   font-size: x-large;
-  margin: 1em;
+  margin: 0em;
+  margin-top: 0em;
+}
+
+nav {
+
+  color: #f1f1f1;
+  background-color: #666;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  box-shadow: 0rem 1rem 1rem rgba(0, 0, 0, 0.3);
+
+}
+
+#title {
+
+
+  margin: auto;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  width: 30%;
+
+  
+  border-style: solid;
+  border-width: 4px;
+  border-color: #f1f1f1;
+  
+  text-align: center;
+  font-style: italic;
+  font-family: 'Times New Roman', Times, serif
+
+}
+
+
+
+#conent {
+
+    margin: 1em;
+
 }
