@@ -9,7 +9,7 @@ require 'sinatra/reloader'
 
 # Routen /
 get '/' do
-    slim(:index)
+
 end
 
 
@@ -34,5 +34,39 @@ get("/todos") do
   p @datados
 
   slim(:index)
+
+end
+
+post ("/todos/:id/done") do
+  id = params[:id]
+
+  db = SQLite3::Database.new("db/todos.db")
+
+  db.results_as_hash = true
+  
+  db.execute("UPDATE todos SET done = 1 WHERE id = ?", id)
+
+  redirect "/todos"
+end
+
+post("/todos/:id/delete") do
+
+  id = params[:id].to_i
+  db = SQLite3::Database.new('db/todos.db')
+
+  db.execute("DELETE FROM todos WHERE id = ?", id)
+
+  redirect("/todos")
+end
+
+post("/todo") do 
+
+  new_todo = params[:new_todo]
+  description = params[:description]
+  
+  db = SQLite3::Database.new('db/todos.db')
+  db.execute("INSERT INTO todos (name, description) VALUES (?,?)",[new_todo,description])
+  
+  redirect("/todos")
 
 end

@@ -1,24 +1,39 @@
 
-h1 ToDos 
 
 /form action="/todos" method="get"
       input name="q" placeholder="Sök på todo" type="text"
       input type="submit" value="Sök!"
+section
+      - @datados.each do |todo|
 
-- @datados.each do |todo|
-
-      /h2
-            a href="/todos/#{todo["id"]}/edit" #{todo["name"]}
-      /p Det finns #{todo["amount"]}st
-      
-      /form action="/todos/#{todo["id"]}/delete" method="post"
-            input type="submit" value="🔥delete"/
+            /h2
+                  a href="/todos/#{todo["id"]}/edit" #{todo["name"]}
+            /p Det finns #{todo["amount"]}st
+            
+            /form action="/todos/#{todo["id"]}/delete" method="post"
+                  input type="submit" value="🔥delete"/
 
 
 
-      h2 #{todo["name"]}
-      p #{todo["description"]}
+            h2 #{todo["name"]}
+            p #{todo["description"]}
 
-      input type="submit" value="✅ done"
+            - if todo["done"] == 1
+                  p style="color: green" ✅ Klart!
+            - else
+                  p ❗ Inte klart
 
-      hr
+            form action="/todos/#{todo["id"]}/done" method="post"
+                  input type="submit" value="✅ done"/
+
+            form action="/todos/#{todo["id"]}/delete" method="post"
+                  input type="submit" value="🔥delete"
+
+            hr
+
+section
+
+      form action="/todo" method="post"
+            input type="text" name="new_todo" placeholder="Namnge ny todo"
+            input type="text" name="description" placeholder="Describe todo"
+            input type="submit" value="Lägg till"

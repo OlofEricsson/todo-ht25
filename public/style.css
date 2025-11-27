@@ -42,5 +42,7 @@ nav {
 #conent {
 
     margin: 1em;
+    display: flex;
+    flex-direction: row;
 
 }
