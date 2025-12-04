@@ -3,7 +3,7 @@
 /form action="/todos" method="get"
       input name="q" placeholder="Sök på todo" type="text"
       input type="submit" value="Sök!"
-section
+section id="todocontainer"
       - @datados.each do |todo|
 
             /h2
@@ -13,23 +13,48 @@ section
             /form action="/todos/#{todo["id"]}/delete" method="post"
                   input type="submit" value="🔥delete"/
 
+            section class="todo"
 
+                  h2 #{todo["name"]}
+                  p #{todo["description"]}
 
-            h2 #{todo["name"]}
-            p #{todo["description"]}
+                  - if todo["done"] == 1
+                        p style="color: lightgreen" ✅ Klart!
+                  - else
+                        p ❗ Inte klart
 
-            - if todo["done"] == 1
-                  p style="color: green" ✅ Klart!
-            - else
-                  p ❗ Inte klart
+                  form action="/todos/#{todo["id"]}/done" method="post"
+                        input type="submit" value="✅ done"/
 
-            form action="/todos/#{todo["id"]}/done" method="post"
-                  input type="submit" value="✅ done"/
+                  form action="/todos/#{todo["id"]}/delete" method="post"
+                        input type="submit" value="🔥delete"
 
-            form action="/todos/#{todo["id"]}/delete" method="post"
-                  input type="submit" value="🔥delete"
+section id="todocontainerdone"
+      - @datadosdone.each do |todo|
 
-            hr
+            /h2
+                  a href="/todos/#{todo["id"]}/edit" #{todo["name"]}
+            /p Det finns #{todo["amount"]}st
+            
+            /form action="/todos/#{todo["id"]}/delete" method="post"
+                  input type="submit" value="🔥delete"/
+
+            section class="todo"
+
+                  h2 #{todo["name"]}
+                  p #{todo["description"]}
+
+                  - if todo["done"] == 1
+                        p style="color: lightgreen" ✅ Klart!
+                  - else
+                        p ❗ Inte klart
+
+                  form action="/todos/#{todo["id"]}/undone" method="post"
+                        input type="submit" value="❎ undone"/
+
+                  form action="/todos/#{todo["id"]}/delete" method="post"
+                        input type="submit" value="🔥delete"
+
 
 section
 

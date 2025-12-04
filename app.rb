@@ -9,7 +9,7 @@ require 'sinatra/reloader'
 
 # Routen /
 get '/' do
-
+  redirect "/todos"
 end
 
 
@@ -23,15 +23,25 @@ get("/todos") do
 
   db.results_as_hash = true
 
-  @datados = db.execute("SELECT * FROM todos")
+  @datados = db.execute("SELECT * FROM todos WHERE done = 0")
 
   if query && !query.empty?
     @datados = db.execute("SELECT * FROM todos WHERE name LIKE ?","%#{query}%")
   else
-    @datados = db.execute("SELECT * FROM todos")
+    @datados = db.execute("SELECT * FROM todos WHERE done = 0")
   end
 
   p @datados
+
+  @datadosdone = db.execute("SELECT * FROM todos WHERE done = 1")
+
+  if query && !query.empty?
+    @datadosdone = db.execute("SELECT * FROM todos WHERE name LIKE ?","%#{query}%")
+  else
+    @datadosdone = db.execute("SELECT * FROM todos WHERE done = 1")
+  end
+
+  p @datadosdone
 
   slim(:index)
 
@@ -45,6 +55,18 @@ post ("/todos/:id/done") do
   db.results_as_hash = true
   
   db.execute("UPDATE todos SET done = 1 WHERE id = ?", id)
+
+  redirect "/todos"
+end
+
+post ("/todos/:id/undone") do
+  id = params[:id]
+
+  db = SQLite3::Database.new("db/todos.db")
+
+  db.results_as_hash = true
+  
+  db.execute("UPDATE todos SET done = 0 WHERE id = ?", id)
 
   redirect "/todos"
 end
