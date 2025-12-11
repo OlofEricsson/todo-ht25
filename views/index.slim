@@ -29,6 +29,8 @@ section id="todocontainer"
                   form action="/todos/#{todo["id"]}/delete" method="post"
                         input type="submit" value="🔥delete"
 
+                  a href="/todos/#{todo["id"]}/edit" edit
+
 section id="todocontainerdone"
       - @datadosdone.each do |todo|
 

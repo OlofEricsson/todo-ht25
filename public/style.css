@@ -6,6 +6,7 @@ body {
   margin: 0em;
   margin-top: 0em;
   background-color: #005d4c;
+  height: max-content;
 }
 
 #backgroundimg {
@@ -21,7 +22,8 @@ body {
 
 }
 
-nav {
+header {
+
 
   color: #ffffff;
   background-color: #005d4c;
@@ -69,6 +71,8 @@ h2 {
 
 .todo {
 
+  color: white;
+
   border-radius: 5rem;
 
   margin: 1rem;
@@ -77,11 +81,33 @@ h2 {
   background-color: rgba(249, 249, 249, 0.05);
   box-shadow:inset 0 0 5px rgba(255, 255, 255, 0.1);
   box-shadow:inset 0 0 20px rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(2px);
-  border: solid 2px rgba(255, 255, 255, 0.17);
+  backdrop-filter: blur(5px);
+  border: solid 2px rgba(255, 255, 255, 0.2);
   
+  box-shadow:0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.3);
+
   width: min-content;
   min-width: 20vw;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.2) 0%,      /* dark top */
+    rgba(0,0,0,0) 5%,        /* start fully transparent middle */
+    rgba(0,0,0,0) 95%,       /* end fully transparent middle */
+    rgba(0,0,0,0.4) 100%     /* dark bottom */
+  ), linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.2) 0%,      /* dark top */
+    rgba(0,0,0,0) 5%,        /* start fully transparent middle */
+    rgba(0,0,0,0) 95%,       /* end fully transparent middle */
+    rgba(0,0,0,0.4) 100%     /* dark bottom */
+  ), linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.15) 5%,      /* dark top */
+    rgba(0,0,0,0) 9%,        /* start fully transparent middle */
+    rgba(0,0,0,0) 95%,       /* end fully transparent middle */
+    rgba(0,0,0,0) 100%     /* dark bottom */
+  );
 
 }
 
@@ -90,6 +116,14 @@ footer {
   backdrop-filter: blur(4px);
   filter: brightness(70%);
 
+  padding-top: auto;
   padding-bottom: max-content;
+
+}
+
+
+a {
+
+  color: white;
 
 }
