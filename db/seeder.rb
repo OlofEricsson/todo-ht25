@@ -18,6 +18,7 @@ def drop_tables(db)
   db.execute('DROP TABLE IF EXISTS todos')
 end
 
+
 def create_tables(db)
   db.execute('CREATE TABLE todos (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -25,7 +26,7 @@ def create_tables(db)
               description TEXT,
               done INTEGER DEFAULT 0)')
 end
-
+ 
 def populate_tables(db)
   db.execute('INSERT INTO todos (name, description, done) VALUES ("Köp mjölk", "3 liter mellanmjölk, eko", 0)')
   db.execute('INSERT INTO todos (name, description, done) VALUES ("Köp julgran", "En rödgran", 0)')
