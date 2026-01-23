@@ -8,8 +8,8 @@ enable :sessions
 
 
 # Routen /
-get '/' do
-  redirect "/todos"
+get('/') do
+  slim(:home)
 end
 
 
@@ -117,46 +117,22 @@ post("/todos/:id/update") do
 
 end
 
-post('/store') do
-	session[:key] = params[:username] 
-	redirect to('/view')
-end
+post("/register") do
 
-get('/view') do
-	@name = session[:key]
+  db = SQLite3::Database.new('db/user.db')
 
-end
+  username = params[:username]
+  password = params[:password]
+  confirmpassword = params[:confirmpassword]
 
-post('/login') do
- nameAndSecret = [params[:namn],params[:password]]
- session[:things] = nameAndSecret #Sparas i session
- redirect('/result')#Posten skickas till Geten!
-end
-
-get('/result') do
- slim(:result) 
-end
-
-#Länk som tömmer session (blir 'nil')
-get('/clear_session') do
- session.clear
- slim(:login)
-end
-
-get('/register') do
-  db = SQLite3::Database.new("db/user.db")
-  username = params["username"]
-  password = params["password"]
-  password_confirmation = params["confirm_password"]
-
-  result = db.execute("SELECT id FROM users WHERE username=?", username)
+  result = db.execute("SELECT id FROM user WHERE username=?", username)
 
   if result.empty?
-    if password == password_confirmation
+    if password == confirmpassword
       password_digest = BCrypt::Password.create(password)
       p password_digest
       db.execute("INSERT INTO users(username, password_digest) VALUES (?,?)", [username, password_digest])
-      redirect('/register_confirmation')
+      redirect("/")
     else
       set_error("Password don't match")
       redirect("/error")
@@ -165,4 +141,6 @@ get('/register') do
     set_error("Username already exists")
     redirect("/error")
   end
+
+
 end

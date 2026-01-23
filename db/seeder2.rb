@@ -22,12 +22,12 @@ end
 def create_tables(udb)
   udb.execute('CREATE TABLE user (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
-              name TEXT, 
+              username TEXT, 
               pwd_digest TEXT)')
 end
  
 def populate_tables(udb)
-  udb.execute('INSERT INTO user (id, name, pwd_digest) VALUES (0, "admin", "admin")')
+  udb.execute('INSERT INTO user (id, username, pwd_digest) VALUES (0, "admin", "admin")')
 end
 
 seed!(udb)
