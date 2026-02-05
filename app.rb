@@ -5,13 +5,10 @@ require 'sinatra/reloader'
 
 enable :sessions
 
-
-
 # Routen /
 get('/') do
   slim(:home)
 end
-
 
 get("/todos") do
   
@@ -47,7 +44,7 @@ get("/todos") do
 
 end
 
-post ("/todos/:id/done") do
+post("/todos/:id/done") do
   id = params[:id]
 
   db = SQLite3::Database.new("db/todos.db")
@@ -59,7 +56,7 @@ post ("/todos/:id/done") do
   redirect "/todos"
 end
 
-post ("/todos/:id/undone") do
+post("/todos/:id/undone") do
   id = params[:id]
 
   db = SQLite3::Database.new("db/todos.db")
@@ -101,7 +98,7 @@ get("/todos/:id/edit") do
   @special_todo = db.execute("SELECT * FROM todos WHERE id = ?", id).first
 
   slim(:edit)
-      
+
 end
 
 post("/todos/:id/update") do
